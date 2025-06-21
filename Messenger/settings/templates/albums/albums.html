@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Альбоми
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+    <link rel="stylesheet" href="{% static 'css/albums/albums.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/home/form.css' %}"> -->
+{% endblock %}
+
+{% block content %}
+    <form class = 'album' action="" method = "post">
+        <span id="closePostForm" class="close-post-form" onclick="hideForm()">&times;</span>
+        <title class = 'create-album'>Створити альбом</title>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="card-buttons">
+            <button type="button" class = 'cancel'>Скасувати</button>
+            <button class = 'save'>Зберегти</button>
+        </div>
+    </form>
+
+    <nav class="settings-links">
+        <a href="/settings/{{ request.user.pk }}" class="is-passive">Особиста інформація</a>
+        <h1 class="is-active">Альбоми</h1>
+    </nav>
+
+    <div class="main-block">
+        <div class="card my-albums">
+            <div class="pseudo-header">
+                <h2 class="title">Мої фото</h2>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <input type="file" style="display: none;">
+                    <button class="header-button" type="button">
+                        <img class="header-image" src="{% static 'images/add-image.png' %}" alt="">
+                        Додати фото
+                    </button>
+                </form>
+            </div>
+
+            <div class="album-images">
+                <div class="image delete-top" style="background-color: bisque;">
+                    <button class="header-button round">
+                        <img class="header-image" src="{% static 'images/trashcan.png' %}" alt="">
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card no-albums">
+            <div class="pseudo-header">
+                <h2 class="title">Немає ще жодного альбому</h2>
+                <button class="header-button" type="button" onclick="showForm()">
+                    <img class="header-image" src="{% static 'images/plus.png' %}" alt="">
+                    Створити альбом
+                </button>
+            </div>
+        </div>
+
+        <div class="card my-albums">
+            {% for album in albums %}
+                
+                <div class="pseudo-header">
+                    <h2 id="albumName" class="title">{{ album.name }}</h2>
+                    <div>
+                        <button class="header-button round" type="button">
+                            <img class="header-image" src="{% static 'images/eye.png' %}" alt="">
+                        </button>
+                        <img class="header-image" src="{% static 'images/dots.png' %}" alt="" class="dots">
+                    </div>
+                </div>
+                <span>
+                    {{ album.topic }}
+                    <p class="album-creation-date">{{ album.created_at }}</p>
+                </span>
+                <hr>
+                <span><h3>Фотографії</h3></span>
+                <div class="album-images">
+                    {% for image in album.images.all %}
+                        <img class="image" src="{{ image.file.url }}" alt="{{ image.filename }}">
+                    {% endfor %}
+                    <div class="add-image image">
+                        <button class="header-button round" type="button">
+                            <input type="file" class="add-image-input" id="{{ album.id }}">
+                            <img class="header-image" src="{% static 'images/plus.png' %}" alt="">
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/showAlbumForm.js' %}"></script>
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/addAlbumImage.js' %}"></script>
+{% endblock %}

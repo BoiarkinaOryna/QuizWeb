@@ -1,0 +1,91 @@
+header{
+    justify-content: center;
+}
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    position: fixed;
+    width: 25vw;
+    min-width: 350px;
+    height: 60vh;
+    top: 20vh;
+    left: 25vw;
+    flex-direction: column;
+    /* display: flex; */
+    justify-content: space-between;
+    /* align-items: center; */
+    border-radius: 2vh;
+    padding: 5vh; 
+}
+.no-styles{
+    position: static;
+    width: fit-content;
+    height: fit-content;
+}
+.background-img{
+    position: relative;
+    top: 20vh;
+    left: 45vw;
+    width: 40vw;
+}
+.reg, .auth{
+    color: #070A1C;
+    position: relative;
+    box-sizing: border-box;
+    font-size: 3.8vh;
+    font-weight: 700;
+}
+.title h2 {
+    font-family: 'GT Walsheim Pro', sans-serif;
+    font-weight: 500;
+    font-size: 2.5vh;
+    letter-spacing: -1%;
+    text-align: center;
+}
+div{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    align-items: start;
+    width: 20vw;
+}
+.title{
+    /* width: 100%;
+    max-width: 100%;
+    box-sizing: border-box; */
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
+input{
+    background-color: white;
+    box-sizing: border-box;
+    padding: 1vw 1vh;
+    top: 30vw;
+    width: 20vw;
+    height: 2vh;
+    margin-bottom: 1vw;
+    border-radius: 1vh;
+    border: 1px solid #CDCED2;
+}
+.header-content{
+    width: fit-content;
+}
+.create{
+    width: 20vw;
+    height: 5vh;
+    border-radius: 1234px;
+    background-color: #543C52;
+    color: white;
+    border: none;
+    /* position: fixed; */
+    /* top: 600px; */
+}
+.is-active{
+    border-bottom: 0.5vh solid #543C52;
+}
+.is-passive{
+    color: grey;
+}

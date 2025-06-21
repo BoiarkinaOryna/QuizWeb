@@ -1,0 +1,43 @@
+.post-options {
+    position: relative;
+}
+
+.hidden-form {
+    display: none;
+}
+
+.visible-form {
+    position: absolute;
+    background-color: #E9E5EE;
+    width: fit-content;
+    right: -0.7vw;
+    bottom: -13.1vh;
+    padding: 1vh;
+    height: fit-content;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modal-item{
+    display: flex;
+    justify-content: start;
+    gap: 1vw;
+    width: 20vw;
+    padding: 1vh 0;
+    font-weight: bold;
+    background-color: #E9E5EE;
+    border: 1px solid #E9E5EE;
+    border-radius: 0.35vw;
+    font-size: 2vh;
+}
+.showChangePost{
+    margin-top: 5vh;
+    border-bottom: 1px solid #CDCED2;
+}
+
+.dots{
+    z-index: 2;
+    position: relative;
+}

@@ -1,0 +1,46 @@
+{% load static %}
+
+{% if post == "" %}
+    <form id="create" class="hidden-post-form createPostForm" method="post" enctype="multipart/form-data">
+        <div class="text-info">
+        <span id="closePostForm" class="close-post-form">&times;</span>
+        {% csrf_token %}
+        <h1 class = 'creation'>Створення публікації</h1>
+{% else %}
+    <form id="change{{ post.id }}" class="hidden-post-form changePostForm" action="{% url 'change_post' post.id %}" method="post">
+        <div class="text-info">
+        <span id="closePostForm" class="close-post-form">&times;</span>
+        {% csrf_token %}
+        <h1 class = 'creation'>Редагування публікації {{ post.id }}</h1>
+{% endif %}
+    {{ form.as_p }}
+    </div>
+    <div class="post-images" id="{{ post.id }}">
+        <div class="temp-image-container"></div>
+
+    </div>
+    <div class="form-buttons">
+        <div class="add-image">
+            <input id="{{ post.id }}" class="addImageInput" type="file">
+            <img src="{% static 'images/add-image.png' %}" alt="" class="small-images">
+            <!-- <button id="{{ post.id }}" class="addImageButton" style="display: none;"></button> -->
+        </div>
+        <div class="add-emoji">
+            <img src="{% static 'images/add-emoji.png' %}" alt="" class="small-images">
+            <!-- <button class="addImageButton" style="display: none;"></button> -->
+        </div>
+        {% if post == "" %}
+            <button class='post-p' type="submit">
+                <h6 class='send'>Публікація</h6>
+                <img class='small-images' src="{% static 'images/send.png' %}" alt="">  
+            </button> 
+        {% else %}
+            <button id="{{ post.id }}" class='post-p' type="submit">
+                <h6 class = 'send'>Зберегти</h6>
+                <img class = 'small-images' src="{% static 'images/send.png' %}" alt="">  
+            </button>
+        {% endif %}
+        </div>
+    
+</form>
+

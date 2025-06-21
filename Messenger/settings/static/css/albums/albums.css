@@ -1,0 +1,138 @@
+.no-albums{
+    height: 8vh;
+}
+
+.my-albums{
+    height: fit-content;
+}
+
+.pseudo-header div{
+    display: flex;
+    gap: 1vw;
+}
+
+.delete-top{
+    display: flex;
+    justify-content: end;
+    align-items: start;
+    padding: 1vh;
+}
+
+.my-albums span{
+    width: 67vw;
+    display: flex;
+    justify-content: left;
+    gap: 1vw;
+}
+
+.album-creation-date{
+    color: #81818D;
+}
+
+hr{
+    width: 67vw;
+    color: #CDCED2;
+}
+
+.album-images{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 2vw;
+    width: 67vw;
+}
+
+.image{
+    width: 20vh;
+    height: 20vh;
+    border-radius: 1vh;
+    background-repeat: no-repeat;
+}
+
+.add-image{
+    display: flex;
+    width: 20vh;
+    height: 20vh;
+    border: 2px dotted #81818D;
+    border-radius: 1vh;
+}
+
+.add-image-input{
+    position: absolute;
+    opacity: 0;
+}
+
+.button-bottom{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    gap: 0.5vw;
+    padding: 1vh;
+}
+.album{
+    position: fixed;
+    z-index: 3;
+    top: 27vh;
+    left: 37vw;
+    display: none;
+    flex-direction: column;
+    gap: 2.78vh;
+    padding-bottom: 5vh;
+    width: 25vw;
+    height: 45vh;
+    background-color: #FFFFFF;
+    border: 1px solid #81818D;
+    border-radius: 3vh;
+}
+
+.album input{
+    position: relative;
+    top: 1vh;
+    border-radius: 10px;
+    padding: 1vh;
+    border: 1px solid #81818D;
+    width: 20vw;
+    height: 4.3vh;
+}
+.create-album{
+    position: relative;
+    width: 20vw;
+    top: 1vh;
+    font-weight: bolder;
+    border: 4px;
+    font-size: 24;
+}
+.album label{
+    font-weight: bold;
+    position: relative;
+    top: 0.5vh;
+}
+
+.card-buttons{
+    position: relative;
+    top: 0.5vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+    justify-content: right;
+    padding: 0 2.6vw;
+    width: 100%;
+}
+
+.save, .cancel{
+    display: flex;
+    width: fit-content;
+    padding: 1vh;
+    border-radius: 1234px;
+    border: 1px solid #543C52;
+    background-color: #FFFFFF;
+    font-weight: bold;
+    color: #543C52
+}
+
+.save{
+    background-color: #543C52;
+    color: #FFFFFF;
+    /* position: relative;
+    bottom: 3vw; */
+}

@@ -1,0 +1,13 @@
+.modal-window{
+    position: relative;
+    display: fixed;
+    justify-content: center;
+    gap: 36px;
+    /* width: 50vw;
+    height: 0; */
+    /* left: 248.52px; */
+}
+
+.modal-form{
+    position: absolute;
+}

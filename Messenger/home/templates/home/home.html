@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load post_forms %}
+
+{% block title %}
+    Домашня сторінка
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/home/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home/info-form.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="dark-background">{% form_for_post "" %}</div>
+
+    <div class="my-info">
+        <div class="about-me">
+            <div class="me">
+                <div class="my-avatar"><div class="I-am-online"></div></div>
+                
+                <span class="username">
+                    <p class="name">{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                    <p class="username"> {{ request.user.username }} </p>
+                </span>
+            </div>
+            <div class="my-status">
+                <span>
+                    <p class="status-number">{{ my_posts_length }}</p>
+                    <p class="status-title">Дописи</p>
+                </span>
+                <div class="vtc-line"></div>
+                <span>
+                    <p class="status-number">0</p>
+                    <p class="status-title">Читачі</p>
+                </span>
+                <div class="vtc-line"></div>
+                <span>
+                    <p class="status-number">{{ my_friends | length }}</p>
+                    <p class="status-title">Друзі</p>
+                </span>
+            </div>
+        </div>
+
+        <div class="friends">
+            <span class="top-text">
+                <p class="section-title">
+                    <img src="{% static 'images/friends-grey.png' %}" alt="" class="small-images"> Запити
+                </p>
+                <p class="see-all">Дивитись всі</p>
+            </span>
+            <div class="friend-requests">
+                {% for friend in my_friends %}
+                    <div class="request">
+                        <div class="avatar-container"></div>
+                        <span class="friend-info">
+                            <p class="friend-name">{{ friend.first_name }} {{ friend.last_name }}</p>
+                            <p class="friend-request-followers">4.3к підписників</p>
+                        </span>
+                    </div>
+                {% endfor %}
+                <!-- <div class="request">
+                    <div class="avatar-container"></div>
+                    <img class="avatar" src="{% static 'images/friend2.jpg' %}" alt="" class="small-images">
+                    <span class="friend-info">
+                        <p class="friend-name">Ann Ann</p>
+                        <p class="friend-request-followers">1.6к підписників</p>
+                    </span>
+                </div>
+                <div class="request">
+                    <div class="avatar-container"></div>
+                    <img class="avatar" src="{% static 'images/friend3.jpg' %}" alt=""class="small-images"> 
+                    <span class="friend-info">
+                        <p class="friend-name">Yeugen Jenua</p>
+                        <p class="friend-request-followers">10.3к підписників</p>
+                    </span>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="chats">
+            <span class="top-text">
+                <p class="section-title">
+                    <img src="{% static 'images/chats-grey.png' %}" alt="" class="small-images"> Повідомлення
+                </p>
+                <p class="see-all">Дивитись всі</p>
+            </span>
+            <div class="messages">
+                <div class="request">
+                    <div class="avatar-container"></div>
+                    <!-- <img class="avatar" src="{% static 'images/friend4.jpg' %}" alt="" class="small-images"> -->
+                    <span class="friend-info">
+                        <p class="friend-name">Mona Lisa</p>
+                        <p class="friend-message">Привіт! Як справи ?</p>
+                    </span>
+                </div>
+                <div class="request">
+                    <div class="avatar-container"></div>
+                    <!-- <img class="avatar" src="{% static 'images/friend5.jpg' %}" alt="" class="small-images"> -->
+                    <span class="friend-info">
+                        <p class="friend-name">Ann Ti</p>
+                        <p class="friend-message">Привіт!</p>
+                    </span>
+                </div>
+                <div class="request">
+                    <div class="avatar-container"></div>
+                    <!-- <img class="avatar" src="{% static 'images/friend6.jpg' %}" alt="" class="small-images"> -->
+                    <span class="friend-info">
+                        <p class="friend-name">Ness Ty</p>
+                        <p class="friend-message">Привіт!</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="social-media-feed">
+        <div class="create-publication">
+            <span class="thoughts">
+                <p class="what">Про що ти зараз думаєш?</p>
+            </span>
+            <div class="custom">
+                <div class="add-image">
+                    <img src="{% static 'images/add-image.png' %}" alt="" class="small-images">
+                </div>
+                <div class="add-emoji">
+                    <img src="{% static 'images/add-emoji.png' %}" alt="" class="small-images">
+                </div>
+                <div id="createPublication" class="publish">
+                    <p>Перейти до оформлення</p>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="feed">
+
+            {% if edit_form %}
+                <form class="edit-info-form" action="{% url 'edit-profile' request.user.id %}" method="post">
+                    {% csrf_token %}
+                    <h2>Додай деталі про себе</h2>
+                    {{ edit_form }}
+                    <span>
+                        <button class="post-p">Продовжити</button>
+                    </span>
+                </form>
+            {% endif %}
+        
+            {% for post in object_list %}
+                <div class="post">
+                    <div class="creator">
+                        <div class="creator-info">
+                            <div class="main-info">
+                                <div class="avatar-container">
+                                    <!-- <img class="avatar" src="{% static 'images/avatar2.jpg' %}" alt="" class="small-images"> -->
+                                    <div class="is-offline"></div>
+                                </div>
+                                <p class="creator-name">{{ post.author }}</p>
+                            </div>
+                        </div>
+                        <img src="{% static 'images/dots.png' %}" alt="" class="dots small-images">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-text">
+                            <p class="title">{{ post.title }}</p>
+                            <p>
+                                {{ post.content }}
+                            </p>
+                            <p class="post-tags">
+                                {% for tag in post.tags.all %}
+                                    {{ tag.name }}
+                                {% endfor %}
+                            </p>
+                            <div class="post_images_container">
+                                {% for image in post.images.all %}
+                                    <img class="post_image" src="{{ image.file.url }}" alt="{{ image.filename }}">
+                                {% endfor %}
+                            </div>
+                            
+                        </div>
+                        <div class="aktives">
+                            <div class="likes">
+                                <img src="{% static 'images/likes.png' %}" alt="" class="small-images">
+                                <p>{{ post.likes }} Вподобань</p>
+                            </div>
+                            <div class="views">
+                                <img src="{% static 'images/views.png' %}" alt="" class="small-images">
+                                <p>{{ post.views }} Переглядів</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const staticBase = "{% static 'images/temp_post_images/' %}";
+    </script>
+    <script src="{% static 'js/showForm.js' %}"></script>
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/addImage.js' %}"></script>
+    <script src="{% static 'js/tags.js' %}"></script>
+{% endblock %}

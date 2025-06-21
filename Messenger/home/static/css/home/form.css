@@ -1,0 +1,152 @@
+.dark-background{
+    background-color: #070a1c9a;
+}
+
+.active-dark-background{
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.active-dark-background::-webkit-scrollbar {
+    display: none;
+}
+
+.hidden-post-form {
+    display: none;
+}
+
+.post-form {
+    position: absolute;
+    z-index: 3;
+    top: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 1vh;
+    padding-top: 3vh;
+    width: 55vw;
+    height: fit-content;
+    min-height: 70vh;
+    background-color: #FFFFFF;
+    border: 1px solid #81818D;
+    border-radius: 3vh;
+}
+
+.text-info{
+    display: flex;
+    height: 55vh;
+    flex-direction: column;
+    width: 55vw;
+}
+
+.creation {
+    width: 50vw;
+    height: 5.42vh;
+    position: relative;
+    font-size: 3vh;
+}
+
+.post-form p {
+    position: relative;
+    flex-direction: column;
+    gap: 1vh;
+    width: 50vw;
+    height: fit-content;
+    margin: auto;
+    size: 16px;
+}
+
+.post-form p textarea {
+    width: 50vw;
+    height: 18.06vh;
+    border-radius: 0.69vw;
+}
+
+.send {
+    position: relative;
+    font-size: 18px;
+    /* right: 0.42vw; */
+    color: white;
+    /* top: 1.25vh; */
+}
+
+.post-form p input {
+    padding: 0.5vw;
+    border-radius: 0.69vw;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: 1px solid #81818D;
+    width: 23.82vw;
+    height: 5.83vh;
+}
+
+.addImageInput{
+    position: absolute;
+    opacity: 0;
+}
+
+.post-form span{
+    display: flex;
+    justify-content: flex-end;
+    width: 50vw;
+    height: 1vh;
+}
+
+.post-p{
+    display: flex;
+    background-color: #543C52;
+    border-radius: 1.39vw;
+    border: 1px solid #543C52;
+    width: fit-content;
+    height: 4vh;
+    padding: 1vh;
+    position: relative;
+    gap: 0.5vh;
+}
+
+.form-buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5vw;
+    width: 50vw;
+}
+
+.close-post-form {
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+    transition: color 0.2s ease;
+}
+
+#id_tags{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 0.5vw;
+    width: 50vw;
+}
+  
+.tag-div div label{
+    display: flex;
+    height: 3.5vh;
+    padding: 0 0.1vw;
+    background-color: #E9E5EE;
+    border-radius: 1vh;
+    color: #543C52;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    user-select: none;
+    border: 1px solid transparent;
+}
+
+input[type="checkbox"] { display: none; }

@@ -1,0 +1,61 @@
+{% load static %}
+
+<html lang="en">
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        {% block links %}{% endblock %}
+    </head>
+    <body>
+        <header {% if not request.user %}class="unauthorized"{% endif %}>
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="" class="logo">
+            </a>
+        
+            <div class="header-content">
+                {% if request.user.is_authenticated %}
+                    <div class="links">
+                        <div class="link">
+                            <img src="{% static 'images/home.png' %}" alt="" class="header-image">
+                            <a href="/">Головна</a>
+                        </div>
+                        <div class="link">
+                            <img src="{% static 'images/my_posts.png' %}" alt="" class="header-image">
+                            <a href="/my_posts">Мої публікації</a>
+                        </div>
+                        <div class="link">
+                            <img src="{% static 'images/friends.png' %}" alt="" class="header-image">
+                            <a href="/friends">Друзі</a>
+                        </div>
+                        <div class="link">
+                            <img src="{% static 'images/chats.png' %}" alt="" class="header-image">
+                            <a href="/chats/2">Чати</a>
+                        </div>
+                        <div class="link">
+                            <img src="{% static 'images/settings.png' %}" alt="" class="header-image">
+                            <a href="/settings/{{ request.user.pk }}">Налаштування</a>
+                        </div>
+                    </div>
+                    <form action="{% url 'logout' %}" method="post" class="no-styles">
+                        {% csrf_token %}
+                        <button class="logout">
+                            <img src="{% static 'images/logout.png' %}" alt="" class="header-image">
+                            <p>Вихід</p>
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        </header>
+        <main>
+            {% block content %}
+            
+            {% endblock %}
+        </main>
+        
+        {% block scripts %}    
+        {% endblock %}
+    </body>
+</html>

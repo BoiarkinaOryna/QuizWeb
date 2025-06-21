@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Друзі
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+    <link rel="stylesheet" href="{% static 'css/friends/friends.css' %}">
+{% endblock %}
+
+{% block content %}
+    <nav class="settings-links">
+        {% if active == "main" %}
+            <h1 class="is-active">Головна</h1>
+            <a href="/friends/requests" class="is-passive">Запити</a>
+            <a href="/friends/recommendations" class="is-passive">Рекомендації</a>
+            <a href="/friends/all_friends" class="is-passive">Всі друзі</a>
+        {% elif active == "requests" %}
+            <a href="/friends" class="is-passive">Головна</a>
+            <h1 class="is-active">Запити</h1>
+            <a href="/friends/recommendations" class="is-passive">Рекомендації</a>
+            <a href="/friends/all_friends" class="is-passive">Всі друзі</a>
+        {% elif active == "recommendations" %}
+            <a href="/friends" class="is-passive">Головна</a>
+            <a href="/friends/requests" class="is-passive">Запити</a>
+            <h1 class="is-active">Рекомендації</h1>
+            <a href="/friends/all_friends" class="is-passive">Всі друзі</a>
+        {% else %}
+            <a href="/friends" class="is-passive">Головна</a>
+            <a href="/friends/requests" class="is-passive">Запити</a>
+            <a href="/friends/recommendations" class="is-passive">Рекомендації</a>
+            <h1 class="is-active">Всі друзі</h1>
+        {% endif %}
+    </nav>
+
+    <div class="main-block">
+        {% if active == "main" %}
+
+            <div class="card">
+                <div class="pseudo-header">
+                    <h2 class="title">
+                        Запити                            
+                    </h2>
+                </div>
+            
+                <div class="user-cards-list">
+                    {% for user in requests %}
+                        <div class="user-card">
+                            <a href="/friends/friend/{{ user.id }}">
+                                <div class="info">
+                                    <div class="avatar">
+                                        <div class="is-offline"></div>
+                                    </div>
+                                    <span class="friend-info">
+                                        <p class="friend-name">{{ user.first_name }} {{ user.last_name }}</p>
+                                        <p class="friend-username">{{ user.username }}</p>
+                                    </span>
+                                </div>
+                            </a>
+                            <span class="card-buttons">
+                                <button class="confirm-button" value="requests" button id="{{ user.id }}">
+                                    Підтвердити
+                                </button>
+                                <button class="decline-button" value="delete" button id="{{ user.id }}">Видалити</button>
+                            </span>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+            <div class="card">
+                <div class="pseudo-header">
+                    <h2 class="title">
+                        Рекомендації
+                    </h2>
+                </div>
+            
+                <div class="user-cards-list">
+                    {% for user in recommendations %}   
+                        <div class="user-card">
+                            <a href="/friends/friend/{{ user.id }}">
+                                <div class="info">
+                                    <div class="avatar">
+                                        <div class="is-offline"></div>
+                                    </div>
+                                    <span class="friend-info">
+                                        <p class="friend-name">{{ user.first_name }} {{ user.last_name }}</p>
+                                        <p class="friend-username">{{ user.username }}</p>
+                                    </span>
+                                </div>
+                            </a>
+                            <span class="card-buttons">
+                                <button class="confirm-button" value="recommendations" button id="{{ user.id }}">
+                                        Додати
+                                </button>
+                                <button class="decline-button">Видалити</button>
+                            </span>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+            <div class="card">
+                <div class="pseudo-header">
+                    <h2 class="title">
+                        Всі друзі
+                    </h2>
+                </div>
+            
+                <div class="user-cards-list">
+                    {% for user in all_friends %}  
+                        <div class="user-card">
+                            <a href="/friends/friend/{{ user.id }}">
+                                <div class="info">
+                                    <div class="avatar">
+                                        <div class="is-offline"></div>
+                                    </div>
+                                    <span class="friend-info">
+                                        <p class="friend-name">{{ user.first_name }} {{ user.last_name }}</p>
+                                        <p class="friend-username">{{ user.username }}</p>
+                                    </span>
+                                </div>
+                            </a>
+                            <span class="card-buttons">
+                                <button class="confirm-button" value="all_friends" button id="{{ user.id }}">
+                                        Повідомлення
+                                </button>
+                                <button class="decline-button" value="delete" button id="{{ user.id }}">Видалити</button>
+                            </span>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+            
+        {% else %}
+
+            <div class="card">
+                <div class="pseudo-header">
+                    <h2 class="title">
+                        {% if active == "all_friends" %}
+                            Всі друзі
+                        {% elif active == "requests" %}
+                            Запити
+                        {% else %}
+                            Рекомендації
+                        {% endif %}
+                    </h2>
+                </div>
+            
+                <div class="user-cards-list">
+                    {% for user in all_users %}
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <div class="user-card">
+                            <a href="/friends/friend/{{ user.id }}">
+                                <div class="info">
+                                    <div class="avatar">
+                                        <div class="is-offline"></div>
+                                    </div>
+                                    <span class="friend-info">
+                                        <p class="friend-name">{{ user.first_name }} {{ user.last_name }}</p>
+                                        <p class="friend-username">{{ user.username }}</p>
+                                    </span>
+                                </div>
+                            </a>
+                            <span class="card-buttons">
+                                <button id="{{ user.id }}" class="confirm-button" value="{{ active }}" type="button" method="post">
+                                    {% if active == "all_friends" %}
+                                        Повідомлення
+                                    {% elif active == "requests" %}
+                                        Підтвердити
+                                    {% else %}
+                                        Додати
+                                    {% endif %}
+                                </button>
+                                <button type="button" class="decline-button" value="delete" button id="{{ user.id }}">Видалити</button>
+                            </span>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        {% endif %}    
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/sendForm.js' %}"></script>
+{% endblock %}

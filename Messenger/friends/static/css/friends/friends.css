@@ -1,0 +1,83 @@
+.user-cards-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+}
+
+.card{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    height: fit-content;
+}
+
+.user-card{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 17vw;
+    height: 30vh;
+    border: 1px solid #CDCED2;
+    border-radius: 1vh;
+    overflow: hidden;
+}
+
+.avatar{
+    width: 5vw;
+    height: 5vw;
+    border-radius: 1234px;
+    background-color: #543C52;
+}
+
+.is-online, .is-offline{
+    position: relative;
+    width: 1.5vh;
+    height: 1.5vh;
+    top: 3.8vw;
+    left: 3.8vw;
+    border: 1px solid #FFFFFF;
+    border-radius: 1234px;
+    background-color: #22C55E;
+}
+
+.is-offline{
+    background-color: #CDCED2;
+}
+
+.info, .friend-info{
+    display: flex;
+    flex-direction: column;
+    gap: 1.8vh;
+}
+
+.friend-name{
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+.friend-username{
+    font-weight: bold;
+}
+
+.card-buttons{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+    width: 15vw;
+}
+
+.confirm-button, .decline-button{
+    display: flex;
+    width: fit-content;
+    padding: 1vh;
+    border-radius: 1234px;
+    border: 1px solid #543C52;
+    background-color: #FFFFFF;
+    font-weight: bold;
+    color: #543C52;
+}
+
+.confirm-button{
+    background-color: #543C52;
+    color: #FFFFFF;
+}

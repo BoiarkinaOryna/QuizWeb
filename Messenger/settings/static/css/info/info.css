@@ -1,0 +1,50 @@
+.settings-links{
+    position: absolute;
+    top: 12vh;
+    left: 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1vh;
+}
+
+.my-avatar, .avatar{
+    width: 5vw;
+    height: 5vw;
+    border-radius: 1234px;
+    background-color: #543C52;
+}
+
+.main-info{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+}
+
+.personal-info{
+    height: 50vh;
+}
+
+.edit-info{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 67vw;
+    gap: 1vh;
+}
+
+label{
+    margin-bottom: 0.5vh;
+}
+
+input{
+    width: 20vw;
+    height: 4vh;
+    padding: 0.5vw;
+    border-radius: 1vh;
+    border: 1px solid #CDCED2;
+}
+
+.errorlist li{
+    color: #F43F5E;
+}

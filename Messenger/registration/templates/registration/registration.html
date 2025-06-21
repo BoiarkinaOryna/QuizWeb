@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Реєстрація
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/registration/registration.css' %}">
+{% endblock %}
+
+{% block content %}
+    <img class = 'background-img' src="{% static 'images/Background.png' %}" alt="">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="title">
+            <h1 class = 'is-active reg'>Реєстрація</h1>
+            <a href="/registration/authorization" class = 'is-passive auth'>Авторизація</a>
+        </div>
+        <div class="title">
+            <h2>Приєднуйся до World It</h2>
+        </div>
+        {{ form }}
+        <button class='create' type="submit">Створити акаунт</button>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

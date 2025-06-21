@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Головна сторінка
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/friends/prof.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="my-info">
+        <div class="about-me">
+            <div class="me">
+                <div class="my-avatar"><div class="I-am-online"></div></div>
+                <span class="username">
+                    <p class="name">{{ person.first_name }} {{ person.last_name }}</p>
+                    <p class="username"> {{ person.username }} </p>
+                </span>
+            </div>
+            <div class="my-status">
+                <span>
+                    <p class="status-number">0{{ profile_posts_length }}</p>
+                    <p class="status-title">Дописи</p>
+                </span>
+                <div class="vtc-line"></div>
+                <span>
+                    <p class="status-number">0</p>
+                    <p class="status-title">Читачі</p>
+                </span>
+                <div class="vtc-line"></div>
+                <span>
+                    <p class="status-number">0</p>
+                    <p class="status-title">Друзі</p>
+                </span>
+            </div>
+        </div>
+
+        <div class="album" >
+            <div class="line" >
+                <div class="check" >
+                    <div class="text-album" >
+                        <p class="icon-text" ><img class="icon-img" src="{% static '/img/icon.png' %}" alt=""> Альбоми</p>
+                    </div>
+                    <button class="check-all" >
+                        Дивитись всі
+                    </button>
+                </div>
+            </div>
+            <div class="album1" >
+                <div class="title1" >
+                    <h1 class="title-text" >Настрій </h1>
+
+                </div>
+                <div class="description-all" >
+                    <h1 class="description" >Природа</h1>
+                    <h1 class="description-year" >2025 рік</h1  >
+
+                </div>
+                <img class="nature" src="{% static '/img/nature.png' %}" alt="">
+
+
+            </div>
+            <div class="album1" >
+                <div class="title1" >
+                    <h1 class="title-text" >Настрій </h1>
+
+                </div>
+                <div class="description-all" >
+                    <h1 class="description" >Природа</h1>
+                    <h1 class="description-year" >2025 рік</h1  >
+
+                </div>
+                <img class="nature" src="{% static '/img/nature.png' %}" alt="">
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+    
+    <div class="social-media-feed">
+        <div class="feed">
+            {% for post in all_posts %}
+                <div class="publication">
+                    <div class="header">
+                        
+                        
+                        <div class="people-pub">
+                            <img src="{% static 'image/Lina.png' %}" class="avatar">
+                            <p>{% if post.author %}{{ post.author.username }}{% else %}Анонім{% endif %}</p>
+                        </div>
+                    </div>
+                    <div class="pub-content">
+                        <h3 class="name">{{ post.name }}</h3>
+                        <p>{{ post.text }}</p>
+                        <p>{{post.topic}}</p>
+                        <div class="tags-scroll-container">
+                            {% for tag in post.get_tags_list %}
+                                <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        {% if post.link %}
+                            <a href="{{ post.link }}" target="_blank">{{ post.link }}</a>
+                        {% endif %}
+
+                        <div class = "post-images">
+                            {% for image in post.images.all %}
+                                <img src="{{ image.image.url }}" class="post-image">
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="reaction">
+                            <div class="likes">
+                                <img src="{% static 'image/Like.png' %}" class="like-photo">
+                                <p>120 Вподобань</p>
+                            </div>
+                            <div class="views">
+                                <img src="{% static 'image/eye.png' %}" class="views-photo">
+                                <p>890 Переглядів</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="no-posts">
+                    <p>Публікацій поки що немає</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+    

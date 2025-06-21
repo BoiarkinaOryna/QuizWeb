@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Enter code
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/registration/registration.css' %}">
+    <link rel="stylesheet" href="{% static 'css/validation/validation.css' %}">
+{% endblock %}
+
+{% block content %}
+    <img class = 'background-img' src="{% static 'images/Background.png' %}" alt="">
+    <!-- <div class="modal-window"> -->
+        <form class="modal-form" action="" method="post">
+            {% csrf_token %}
+            <div class="title">
+                <h1 class = 'is-active auth'>Код підтвердження</h1>
+            </div>
+            <div class="title">
+                <h2>Приєднуйся до World It</h2>
+            </div>
+            <label for="">Введіть пароль</label>
+            <input name="code" type="number">
+            <button class='create'>Підтвердити код</button>
+        </form>
+    <!-- </div> -->
+{% endblock %}

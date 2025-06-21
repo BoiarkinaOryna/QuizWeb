@@ -1,0 +1,42 @@
+.edit-info-form{
+    z-index: 3;
+    position: fixed;
+    top: 25vh;
+    left: 35vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30vw;
+    height: 50vh;
+    padding: 2vw;
+    border-radius: 1px solid #81818D;
+    border-radius: 3vh;
+    background-color: #FFFFFF;
+}
+
+.edit-info-form h2{
+    font-size: 4vh;
+}
+
+.edit-info-form div{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1vh;
+    width: 26vw;
+    height: fit-content;
+}
+
+.edit-info-form div input{
+    padding: 2vh;
+    width: 26vw;
+    height: 5vh;
+    border-radius: 0.69vw;
+    border: 1px solid #81818D;
+}
+
+.edit-info-form span{
+    display: flex;
+    justify-content: flex-end;
+    width: 26vw;
+}

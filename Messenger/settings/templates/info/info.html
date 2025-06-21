@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Інформація
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+    <link rel="stylesheet" href="{% static 'css/info/info.css' %}">
+{% endblock %}
+
+{% block content %}
+    
+    <nav class="settings-links">
+        <h1 class="is-active">Особиста інформація</h1>
+        <a href="/settings/{{ request.user.pk }}/albums" class="is-passive">Альбоми</a>
+    </nav>
+
+    <div class="main-block">
+
+        <div class="card">
+            <div class="pseudo-header">
+                <h2 class="title">Картка профілю</h2>
+                <button class="header-button" type="button">
+                    <img class="header-image" src="{% static 'images/pen.png' %}" alt="">
+                    Редагувати інформацію
+                </button>
+            </div>
+            <div class="main-info">
+                <div class="my-avatar"></div>
+                <h3>{{ profile.first_name }} {{ profile.last_name }}</h3>
+                <p>{{ profile.username }}</p>
+            </div>
+        </div>
+
+        <div class="card personal-info">
+            <form action="" class="edit-info" method="post">
+                {% csrf_token %}
+                <div class="pseudo-header">
+                    <h2 class="title">Особиста інформація</h2>
+                    <button class="header-button" type="submit">
+                        <img class="header-image" src="{% static 'images/pen.png' %}" alt="">
+                        Редагувати інформацію
+                    </button>
+                </div>
+                {{ form.as_p }}
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    
+{% endblock %}
