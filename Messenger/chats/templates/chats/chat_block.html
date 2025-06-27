@@ -1,0 +1,52 @@
+{% load static %}
+
+{% if not chat_group %}
+    <h1 class='start'>Почніть нове спілкування</h1>
+    <p class='choose'>Оберіть контакт зі списку ліворуч або створіть групу, щоб почати спілкування</p>
+{% else %}
+    <div class="chat-header">
+        <img src="{% static 'images/left.png' %}" alt="" class="left-p">
+        <div class = 'ava-g'></div>
+        <p style="display: none;" id="chatId">{{ chat_group.id }}</p>
+        <h1 class = 'new-g'>{{ chat_group.name }}</h1>
+        <p class = 'members-o'>3 учасника, 1 в мережі</p>
+        <img src="{% static 'images/points.png' %}" alt="" class="points">
+    </div>
+    
+    <div class="chat-content">
+
+        <div class = 'date-s'>
+            <p class = 'date2-s'>25 квітня 2025</p>
+        </div>
+        <div id="messagesBlock">
+            {% for message in message_history %}
+                <div class="msg-item">
+                    <div class="avatar"></div>
+                    <div class="message-content message-s">
+                        <span class="message-text">
+                            <h4 class="name-s">
+                                {{ message.author.user.first_name }} {{ message.author.user.last_name }}
+                            </h4>
+                            <p class="message">{{ message.content }}</p>
+                            <div class="t-d">
+                                {{ message.sent_at }}
+                                <img src="" alt="" class="small-img">
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <form action="" id= 'message' class="send-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <img src="{% static 'images/smile-i.png' %}" alt="" class="smile-i">
+            <img src="{% static 'images/photo-i.png' %}" alt="" class="photo-i">
+            <button id="sendMessage" type="submit">
+                <img src="{% static 'images/send-i.png' %}" alt="" class="send-i">
+            </button>
+        </form>
+
+    </div>
+    <script src="{% static 'js/sendMessage.js' %}" defer></script>
+{% endif %}

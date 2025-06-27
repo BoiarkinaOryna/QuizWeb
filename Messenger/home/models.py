@@ -5,7 +5,7 @@ from registration.models import Profile
 
 class Image(models.Model):
     filename = models.CharField(max_length = 150)
-    file = models.ImageField(upload_to = "images/post")
+    file = models.ImageField(upload_to = "images/posts")
     uploaded_at = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
@@ -20,10 +20,9 @@ class Tag(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    # theme = models.CharField(max_length=200, null = True, blank = True)
+    topic = models.CharField(max_length=255)
     content = models.TextField(max_length = 4096)
     tags = models.ManyToManyField(Tag, blank = True)
-    # link = models.URLField(null = True, blank = True)
     images = models.ManyToManyField(Image, blank = True, related_name = 'posts_authored')
     views = models.ManyToManyField(Profile, blank = True, related_name = 'posts_viewed')
     likes = models.ManyToManyField(Profile, blank = True, related_name = 'posts_liked')
@@ -46,7 +45,3 @@ class Avatar(models.Model):
 
     def __str__(self):
         return f'Аватар для профілю "{self.profile}"'
-    
-    # def save(self, *args, **kwargs):
-    #     print("save is in progress")
-    #     super().save(*args, **kwargs)

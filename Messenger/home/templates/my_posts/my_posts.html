@@ -28,7 +28,13 @@
             </div>
             <div class="my-status">
                 <span>
-                    <p class="status-number">{{ my_posts_length }}</p>
+                    <p class="status-number">
+                        {% if my_posts_length %}
+                            {{ my_posts_length }}
+                        {% else %}
+                            0
+                        {% endif %}
+                    </p>
                     <p class="status-title">Дописи</p>
                 </span>
                 <div class="vtc-line"></div>

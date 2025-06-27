@@ -8,26 +8,27 @@ from registration.models import Profile
 class ChatConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
-        self.room_group_name = f"{self.scope['url_route']['kwargs']['group_pk']}"
-        print("1room_group_name =", self.room_group_name)
-        await self.channel_layer.group_add(
-            self.room_group_name,
-            self.channel_name
-        )
+        self.room_group_id = f"{self.scope['url_route']['kwargs']['group_pk']}"
+        print("1room_group_id =", self.room_group_id)
+        if self.room_group_id != "choose":
+            await self.channel_layer.group_add(
+                self.room_group_id,
+                self.channel_name
+            )
 
-        await self.accept()
-        await self.send(
-            text_data= json.dumps({
-                'type':'connection_established',
-                'message':'connection_succsefull'
-            })
-        )
+            await self.accept()
+            await self.send(
+                text_data= json.dumps({
+                    'type':'connection_established',
+                    'message':'connection_succsefull'
+                })
+            )
     async def receive(self, text_data):
         '''Отримуємо дані із форми повідомлення, та передаємо назад до клієнта,
         для відображення у чаті всіх повідомлень'''
         message = await self.save_message_to_db(text_data = text_data)
         await self.channel_layer.group_send(
-            self.room_group_name,
+            self.room_group_id,
             {
                 'type': 'send_message_to_every_member',
                 'text_data': text_data,
@@ -61,9 +62,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         '''
             Цю функцію ми створили для того щоб зберігати наші повідомлення у базу даних
         '''
-        print("2room_group_name =", self.room_group_name)
+        print("2room_group_id =", self.room_group_id)
         return ChatMessage.objects.create(
             content = json.loads(text_data)['message'],
             author = Profile.objects.get(user_id = self.scope['user'].id),
-            chat_group = ChatGroup.objects.get(pk = self.room_group_name)
+            chat_group = ChatGroup.objects.get(pk = self.room_group_id)
         )

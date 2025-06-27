@@ -3,95 +3,73 @@
     top: 19vh;
     left: 5vw;
     display: flex;
+    justify-content: start;
     flex-direction: column;
     gap: 1vh;
     background-color: white;
     height: 80vh;
     width: 20vw;
-    border-radius: 10px;
+    border-radius: 1vh;
     border: 1px solid #CDCED2;
-    scrollbar-color: #543C52 #f0f0f0;
 }
-/* .contacts-name{
-    position: relative;
-    bottom:9vh;
-} */
- .plus-w{
-    position: relative;
-    bottom:6vh;
-    right:5vw;
-    z-index:auto;
-    color: white;
+.contacts-header{
+    margin-top: 1vh;
+    display: flex;
+    justify-content: start;
+    gap: 1vw;
+    width: 19vw;
 }
 .contacts-name{
     overflow-y: auto;
     overflow-x: hidden;
-    scrollbar-color: #E9E5EE ;
     width: 20vw;
 }
-.one-name{
-    position: relative;
-    left: 10vw;
-    gap: 0.5vw;
-}
 .contacts-name::-webkit-scrollbar {
-    background: transparent;
+    display: none;
 }
-.contacts-name::-webkit-scrollbar-thumb {
-    background-color: #543C52;
-    border-radius: 10px;
-}
-.contacts-name::-webkit-scrollbar-track {
-    background: transparent;
+.one-name{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+    gap: 1vw;
+    padding: 1vh 1vw;
 }
 .contacts{
-    position: absolute;
-    top: 3vh;
-    right: 11vw;
     color: #81818D;
-    font-size: 28px;
+    font-size: 2.5vh;
 }
 .create-ch{
     position: absolute;
     background-color: #543C52;
     left: 5vw;
     top: 12vh;
+    display: flex;
+    gap: 1vw;
     width: 20vw;
     height: 5vh;
     border-radius: 1234px;
     color: white;
-    border: 1px solid #543C52;
-    font-size: 18px;
+    border: 1vh solid #543C52;
+    font-size: 2vh;
 }
 .search{
     position: relative;
     padding: 1vw;
     padding-left: 1.5vw;
-    top: 6vh;
-    border-radius: 10px;
+    top: 3vh;
+    border-radius: 1vh;
     border: 1px solid #CDCED2;
     width: 18vw;
     height: 5vh;
 }
-.contacts-p{
-    position: absolute;
-    top: 3vh;
-    right: 17vw;
-    width:1.8vw;
-    height:2.5vh;
-}
 .search-p{
     position: relative;
-    top: 1.7vh;
+    top: -1.5vh;
     right: 8vw;
-
 }
 .name-c{
     display: flex;
     flex-direction: column;
-    position: relative;
-    top: 8vh;
-    right: 7vw;
     margin: 0;
     font-weight: bold;
 }
@@ -100,16 +78,12 @@
     justify-content: start;
     display: flex;
     flex-direction: column;
-    margin-left: 1vw;
-    flex-grow: 1;
+    /* flex-grow: 1; */
     width: 6vh;
     height: 6vh;
     flex-shrink: 0;
     background-color: #CDCED2;
     border-radius: 1234px;
-    position: relative;
-    top: 4vh;
-    right: 8vw;
 }
 .green-o{
     position: relative;
@@ -122,47 +96,56 @@
     top:2vh;
 }
 .main-s{
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 5vh;
+    position: relative;
     background-color: white;
-    width: 40vw;
-    height:87vh;
+    width: 48vw;
+    height: 86.8vh;
     left: 26vw;
-    top: 9vh;
+    top: 9.8vh;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
-}
-.start{
-    position: relative;
-    top: 43.5vh;
-    left: 14vw;
-    font-weight: bolder;
-    font-size: 24px;
-}
-.choose{
-    position: relative;
-    width: 24vw;
-    top: 45vh;
-    left: 9vw;
-    word-break: break-all;
-    text-align: center;
+    border-radius: 1vh;
 }
 .chat-header{
     width: 40vw;
+    height: 10vh;
+}
+.chat-content{
+    width: 40vw;
+    height: fit-content;
+    max-height: 70vh;
+}
+.start{
+    font-weight: bolder;
+    font-size: 3vh;
+}
+.choose{
+    width: 24vw;
+    word-break: break-all;
+    text-align: center;
+}
+.right-block{
+    position: absolute;
+    top: 12vh;
+    right: 5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+.messages, .group-chats{
+    width: 20vw;
+    height: 43vh;
 }
 .messages {
     overflow-y: auto;
-    position: absolute;
-    top: 11vh;
-    left: 70vw;
-    width: 20vw;
-    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     background-color: white;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
-    /* padding: 1vh 1vw; */
+    border-radius: 1vh;
     padding-top: 1vh;
     box-sizing: border-box;
 }
@@ -171,17 +154,21 @@
 }
 .mes{
     font-size: 1.2vw;
-    position: relative;
-    bottom:3vh;
     color: #81818D;
-    margin-bottom: 0.1vh;
-    margin-left: 2vw;
+}
+#messagesBlock{
+    overflow-y: auto;
+    max-height: 60vh;
+}
+#messagesBlock::-webkit-scrollbar {
+    display: none;
 }
 .msg-item {
     display: flex;
     align-items: center;
+    justify-content: start;
+    gap: 1vw;
     padding: 0 1vw;
-    justify-content: space-between;
     margin-bottom: 1vh;
 }
 .ava-c {
@@ -203,7 +190,7 @@
     margin: 0;
 }
 .message {
-    font-size: 0.8vw;
+    font-size: 1vw;
     margin: 0.2vh 0 0 0;
     color: #555;
 }
@@ -211,8 +198,8 @@
     font-size: 0.75vw;
     color: #999;
     white-space: nowrap;
-    margin-left: 1vw;
     flex-shrink: 0;
+    text-align: right;
 }
 .msg-text{
     height: 7vh;
@@ -221,12 +208,10 @@
 
 .group-chats {
     background-color: white;
-    border-radius: 10px;
-    width: 20vw;
-    height: 48vh;
-    position: absolute;
-    left: 70vw;
-    top: 51.5vh;
+    border-radius: 1vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     border: 0.1vw solid #CDCED2;
     overflow-y: auto;
     padding-top: 1vh;
@@ -240,19 +225,12 @@
     color: #81818D;
     margin-bottom: 1vh;
 }
-.all {
-    font-size: 20px;
-    color: #543C52;
-    position: absolute;
-    left: 14vw;
-    top: 1.5vh;
-    cursor: pointer;
-}
 .group-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1vw;
+    gap: 1vw;
+    width: 19vw;
     margin-bottom: 1vh;
 }
 .ava2-c {
@@ -284,16 +262,13 @@
     white-space: nowrap;
     margin-left: 1vw;
 }
-.test{
+.message-text{
     height: 7vh;
-    width:20vw;
-}
-.test2{
-    height: 7vh;
-    width:20vw;
-}
-.test1{
-    background-color: #E9E5EE;
+    width: 8vw;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 0 0.5vw;
 }
 .alert{
     height:3vh;
@@ -305,7 +280,7 @@
 .new-g{
     position: relative;
     left:8vw;
-    font-size: 30px;
+    font-size: 3vh;
     bottom:5.1vh;
 }
 .ava-g{
@@ -322,7 +297,7 @@
     position: relative;
     left:8vw;
     bottom:4vh;
-    font-size: 16px;;
+    font-size: 2vh;
 }
 .left-p{
     height:1.5vh;
@@ -338,25 +313,17 @@
     left:38vw;
     bottom: 8vh;
 }
-.chat-content{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: end;
-    width: 37vw;
-    padding-bottom: 2vh;
-}
 .date-s{
-    width: 37vw;
     display: flex;
-}
-.date2-s{
-    background-color: #E9E5EE;
     border-radius: 4px;
     text-align: center;
-    width:7vw;
+    width: 40vw;
+}
+.date2-s{
+    width: 10vw;
+    background-color: #E9E5EE;
     color: #81818D;
-    font-size: 24px;
+    font-size: 2vh;
 }
 .message-f{
     background-color: #CDCED2;
@@ -367,11 +334,7 @@
     top:32vh;
     left:31vw;
 }
-.greeting{
-    position: relative;
-    left: 0.5vw;
-    top: 1vh;
-}
+
 .time{
     position: relative;
     left:4.3vw;
@@ -387,12 +350,9 @@
 .message-s{
     background-color: white;
     border: 1px solid #E9E5EE;
-    border-radius: 6px;
+    border-radius: 0.5vh;
     width: 13vw;
     height:7vh;
-    position: relative;
-    top:28vh;
-    left:5vw;
 }
 .ava2-g{
     width:3vw;
@@ -411,10 +371,7 @@
     font-size: 14px;
 }
 .name-s{
-    font-size: 16px;
-    position: relative;
-    left: 1vw;
-    top: 0.3vh;
+    font-size: 1.5vh;
     color: #543C52;
 }
 .new-m{
@@ -461,40 +418,44 @@
 .send-form{
     display: flex;
     justify-content: space-between;
-    width: 37vw;
+    margin: 1vh;
 }
 .message-i{
     width:25vw;
     border-radius: 10px;
     height:5vh;
-    /* position: relative;
-    top: 28vh;
-    left:1vw; */
     border: 1px solid #CDCED2;
     padding:1vw;
 }
+.errorlist{
+    display: none;
+}
 .smile-i{
-    /* position: relative;
-    left:25vw;
-    top:22.5vh; */
-    width:2.5vw;
-    height:2.5vw;
+    width:3vw;
+    height:3vw;
 }
 .photo-i{
-    /* position: relative;
-    left:30vw;
-    top:16.3vh; */
-    width:2.5vw;
-    height:2.5vw;
+    width:3vw;
+    height:3vw;
 }
 #sendMessage{
     background-color: #ffffff;
     border: none;
 }
 .send-i{
-    /* position: relative;
-    left:35vw;
-    top:10vh; */
-    width:2.5vw;
-    height:2.5vw;
+    width:3vw;
+    height:3vw;
+}
+/* .separator {
+  width: 1px;
+  height: 100vh; 
+  background-color: grey;
+  margin: 0 20px;
+} */
+
+.avatar{
+    width: 5vh;
+    height: 5vh;
+    background-color: #543C52;
+    border-radius: 1234px;
 }

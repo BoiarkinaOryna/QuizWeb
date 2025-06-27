@@ -10,188 +10,73 @@
 {% endblock %}
 
 {% block content %}
-    <button class = 'create-ch'>Створити груповий чат</button>
+    <button class = 'create-ch'>
+        <img src="{% static 'images/plus-w.png' %}" alt="" class="header-image">
+        Створити груповий чат
+    </button>
     <div class = 'my-c'>
-        <img src="{% static 'images/contacts-grey.png' %}" alt="" class="contacts-p">
-        <h1 class = 'contacts'>Контакти</h1>
-        <input class = 'search' type="Пошук" placeholder="Пошук" >
-        <img src="{% static 'images/search.png' %}" alt="" class="search-p">
-        <p class = 'name-c'>Jane Cooper</p>
-        <div class = 'image-c'></div>
-        <p class = 'name-c'>Cameron Williamson</p>
-        <div class = 'image-c'></div>
-        <p class = 'name-c'>Lesli Alexander</p>
-        <div class = 'image-c'></div>
-        <p class = 'name-c'>Robert Fox</p>
-        <div class = 'image-c'></div>
-        <p class = 'name-c'>Jacob Jones</p>
-        <div class = 'image-c'></div>
-        <p class = 'name-c'>Brooklyn Simmons</p>
-        <div class = 'image-c'></div>
-        <p class = 'name-c'>Cameron Williamson</p>
-        <div class = 'image-c'></div>
-        <p class = 'name-c'>Esther Howard</p>
-        <div class = 'image-c'></div>
-        <p class = 'name-c'>Darrell Steward</p>
-        <div class = 'image-c'></div>
+        <div class="contacts-header">
+            <img src="{% static 'images/contacts-grey.png' %}" alt="" class="header-image">
+            <h1 class = 'contacts'>Контакти</h1>
+        </div>
 
+        <input class = 'search' type="search" placeholder="Пошук" >
+        <img src="{% static 'images/search.png' %}" alt="" class="search-p header-image">
+        <div class = 'contacts-name'>
+            {% for friend in all_friends %}
+                <div class = 'one-name'>
+                    <p class = 'name-c'>{{ friend.first_name }} {{ friend.last_name }}</p>
+                    <div class = 'image-c'></div>
+                </div>
+            {% endfor %}
+
+        </div>
     </div>
-    <div class = 'main-s'>
-        {% if not chat_group %}
-            <h1 class='start'>Почніть нове спілкування</h1>
-            <p class='choose'>Оберіть контакт зі списку ліворуч або створіть групу, щоб почати спілкування</p>
-        {% else %}
-            <div class="chat-header">
-                <img src="{% static 'images/left.png' %}" alt="" class="left-p">
-                <div class = 'ava-g'></div>
-                <h1 class = 'new-g'>{{ chat_group.name }}</h1>
-                <p class = 'members-o'>3 учасника, 1 в мережі</p>
-                <img src="{% static 'images/points.png' %}" alt="" class="points">
-            </div>
-            
-            <div class="chat-content">
-
-                <div class = 'date-s'>
-                    <p class = 'date2-s'>25 квітня 2025</p>
-                </div>
-                <div id="messagesBlock">
-                    {% for message in message_history %}
-                        <div class="message">
-                            <div class="avatar"></div>
-                            <div class="message-content">
-                                <span class="message-text">
-                                    <h4 class="sender">
-                                        {{ message.author.user.first_name }} {{ message.author.user.last_name }}
-                                    </h4>
-                                    {{ message.content }}
-                                </span>
-                                <div class="message-time">
-                                    {{ message.sent_at }}
-                                    <img src="" alt="" class="small-img">
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <form action="" id= 'message' class="send-form">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <img src="{% static 'images/smile-i.png' %}" alt="" class="smile-i">
-                    <img src="{% static 'images/photo-i.png' %}" alt="" class="photo-i">
-                    <button id="sendMessage">
-                        <img src="{% static 'images/send-i.png' %}" alt="" class="send-i">
-                    </button>
-                </form>
-
+    <div class="main-s">{% include "chats/chat_block.html" %}</div>
+    
+    <div class="right-block">
+        <div class='messages'>
+            <div class="contacts-header">
+                <img src="{% static 'images/chats(grey).png' %}" alt="" class="header-image">
+                <h1 class='mes'>Повідомлення</h1>
             </div>
     
-        {% endif %}
-    </div>
-    <div class='messages'>
-    <h1 class='mes'>Повідомлення</h1>
-    <h2 class='all'>Дивитись всі</h2>
-
-        <div class='msg-item'>
-            <div class='ava-c'></div>
-            <div class='test'>
-                <p class='name'>Mona Lisa</p>
-                <p class='message'>Привіт! Як справи?</p>
-            </div>
-            <p class='t-d'>09:41</p>
+            {% for chat in personal_chats %}
+                <div class='msg-item'>
+                    <div class='ava-c'></div>
+                    <div class='test'>
+                        <p class='name'>Mona Lisa</p>
+                        <p class='message'>Привіт! Як справи?</p>
+                    </div>
+                    <p class='t-d'>09:41</p>
+                </div>
+            {% endfor %}
+    
         </div>
-
-        <div class='msg-item'>
-            <div class='ava-c'></div>
-            <div class='test'>
-                <p class='name'>Ann Ti</p>
-                <p class='message'>Привіт!</p>
+    
+        <div class="group-chats">
+            <div class="contacts-header">
+                <img src="{% static 'images/chats(grey).png' %}" alt="" class="header-image">
+                <h1 class="group-m">Групові чати</h1>
             </div>
-            <p class='t-d'>25.04.2025</p>
-        </div>
-        <div class='msg-item'>
-            <div class='ava-c'></div>
-            <div class='test'>
-                <p class='name'>Ann Ti</p>
-                <p class='message'>Привіт!</p>
-            </div>
-            <p class='t-d'>25.04.2025</p>
-        </div>
-        <div class='msg-item'>
-            <div class='ava-c'></div>
-            <div class='test'>
-                <p class='name'>Ann Ti</p>
-                <p class='message'>Привіт!</p>
-            </div>
-            <p class='t-d'>25.04.2025</p>
-        </div>
-        <div class='msg-item'>
-            <div class='ava-c'></div>
-            <div class='test'>
-                <p class='name'>Ann Ti</p>
-                <p class='message'>Привіт!</p>
-            </div>
-            <p class='t-d'>25.04.2025</p>
+    
+            {% for group in users_groups %}
+                <div class="group-item" id="{{ group.id }}">
+                    <div class="ava2-c"></div>
+                    <div class="test">
+                        <p class="name2">{{ group.name }}</p>
+                        <p class="message2">Привіт!</p>
+                    </div>
+                    <p class="t-d2">25.04.2025</p>
+                </div>
+            {% endfor %}
+    
         </div>
     </div>
 
-    <div class="group-chats">
-        <h1 class="group-m">Групові чати</h1>
-        <h2 class="all">Дивитись всі</h2>
-
-        <div class="group-item">
-            <div class="ava2-c"></div>
-            <div class="test">
-                <p class="name2">New group</p>
-                <p class="message2">Привіт!</p>
-            </div>
-            <p class="t-d2">25.04.2025</p>
-        </div>
-
-        <div class="group-item">
-            <div class="ava2-c"></div>
-            <div class="test2">
-                <p class="name2">Ann Ti</p>
-                <p class="message2">Привіт!</p>
-            </div>
-            <p class="t-d2">25.04.2025</p>
-        </div>
-
-        <div class="group-item">
-            <div class="ava2-c"></div>
-            <div class = "test2">
-                <p class="name2">Nessa Ty</p>
-                <p class="message2">Привіт!</p>
-            </div>
-            <p class="t-d2">25.04.2025</p>
-        </div>
-        <div class="group-item">
-            <div class="ava2-c"></div>
-            <div class="test2">
-                <p class="name2">Anna Ti</p>
-                <p class="message2">Привіт!</p>
-            </div>
-            <p class="t-d2">25.04.2025</p>
-        </div>
-        <div class="group-item">
-            <div class="ava2-c"></div>
-            <div class="test2">
-                <p class="name2">Anna Ti</p>
-                <p class="message2">Привіт!</p>
-            </div>
-            <p class="t-d2">25.04.2025</p>
-        </div>
-        <div class="group-item">
-            <div class="ava2-c"></div>
-            <div class="test2">
-                <p class="name2">Anna Ti</p>
-                <p class="message2">Привіт!</p>
-            </div>
-            <p class="t-d2">25.04.2025</p>
-        </div>
-
-    </div>
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'js/findChat.js' %}"></script>
 {% endblock %}

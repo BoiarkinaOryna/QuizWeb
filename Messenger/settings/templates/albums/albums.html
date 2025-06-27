@@ -33,20 +33,28 @@
             <div class="pseudo-header">
                 <h2 class="title">Мої фото</h2>
                 <form action="" method="post" enctype="multipart/form-data">
-                    <input type="file" style="display: none;">
-                    <button class="header-button" type="button">
+                    <button class="header-button" type="button" id="addAvatarButton">
+                        <input id="addAvatarInput" type="file" style="display: none;">
                         <img class="header-image" src="{% static 'images/add-image.png' %}" alt="">
                         Додати фото
                     </button>
                 </form>
             </div>
 
-            <div class="album-images">
-                <div class="image delete-top" style="background-color: bisque;">
-                    <button class="header-button round">
-                        <img class="header-image" src="{% static 'images/trashcan.png' %}" alt="">
-                    </button>
-                </div>
+            <div class="album-images" id="addAvatarInput">
+                {% for avatar in avatars %}
+                    <div class="image button-bottom" style="background-image: url('http://127.0.0.1:8000/media/{{ avatar.image }}');">
+                        <button class="header-button round" type="button">
+                            <img class="header-image" src="{% static 'images/eye.png' %}" alt="">
+                        </button>
+                        <button class="header-button round" type="button">
+                            <img class="header-image" src="{% static 'images/trashcan.png' %}" alt="">
+                        </button>
+                    </div>
+                {% endfor %}
+                {% if not avatars %}
+                    <img id="defaultAvatar" class="image" src="{% static 'images/default-avatar.png' %}" alt="">
+                {% endif %}
             </div>
 
         </div>
@@ -61,11 +69,11 @@
             </div>
         </div>
 
-        <div class="card my-albums">
-            {% for album in albums %}
-                
+        
+        {% for album in albums %}
+            <div class="card my-albums">
                 <div class="pseudo-header">
-                    <h2 id="albumName" class="title">{{ album.name }}</h2>
+                    <h2 id="albumName" class="title {{ album.id }}">{{ album.name }}</h2>
                     <div>
                         <button class="header-button round" type="button">
                             <img class="header-image" src="{% static 'images/eye.png' %}" alt="">
@@ -79,7 +87,7 @@
                 </span>
                 <hr>
                 <span><h3>Фотографії</h3></span>
-                <div class="album-images">
+                <div class="album-images" id="{{ album.id }}">
                     {% for image in album.images.all %}
                         <img class="image" src="{{ image.file.url }}" alt="{{ image.filename }}">
                     {% endfor %}
@@ -90,8 +98,8 @@
                         </button>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
         
     </div>
 
@@ -101,4 +109,5 @@
     <script src="{% static 'js/showAlbumForm.js' %}"></script>
     <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'js/addAlbumImage.js' %}"></script>
+    <script src="{% static 'js/saveAvatar.js' %}"></script>
 {% endblock %}

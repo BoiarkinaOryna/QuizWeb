@@ -6,6 +6,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import FormMixin
 from django.views.generic import DeleteView, UpdateView
 from .forms import UserPostForm, ChangeUserPostForm, FirstEditInfoForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post, Image
 from friends.models import Friendship
 from registration.models import User, Profile
@@ -17,7 +18,7 @@ from io import BytesIO
 from django.db.models import Q
 
 
-class HomePageView(FormMixin, ListView):
+class HomePageView(LoginRequiredMixin, FormMixin, ListView):
     model = Post
     form_class = UserPostForm
     template_name = "home/home.html"
@@ -43,7 +44,6 @@ class HomePageView(FormMixin, ListView):
                         context["my_friends"] = context["my_friends"], User.objects.get(id = Profile.objects.get(id = friend.profile1_id).user_id)
                     except:
                         context["my_friends"] = [User.objects.get(id = Profile.objects.get(id = friend.profile1_id).user_id)]
-            print("context =", context["my_friends"])
 
         return context
 
@@ -94,7 +94,7 @@ class HomePageView(FormMixin, ListView):
 
         return redirect("/")
 
-class MyPostsView(FormMixin, ListView):
+class MyPostsView(LoginRequiredMixin, FormMixin, ListView):
     queryset = Post
     form_class = ChangeUserPostForm
     template_name = "my_posts/my_posts.html"
@@ -123,7 +123,6 @@ class MyPostsView(FormMixin, ListView):
                         context["my_friends"] = context["my_friends"], User.objects.get(id = Profile.objects.get(id = friend.profile1_id).user_id)
                     except:
                         context["my_friends"] = [User.objects.get(id = Profile.objects.get(id = friend.profile1_id).user_id)]
-            print("context =", context["my_friends"])
 
         return context
 

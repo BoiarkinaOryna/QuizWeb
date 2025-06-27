@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from registration.models import Profile, User
+from home.models import Post
 from .models import Friendship
 from django.db.models import Q
 from django.http import JsonResponse, HttpRequest
 
 # Create your views here.
 
-class FriendsView(ListView):
+class FriendsView(LoginRequiredMixin, ListView):
     model = Friendship
     template_name = "friends/friends.html"
 
@@ -51,12 +53,22 @@ class FriendsView(ListView):
 
         return context
 
-class FriendPageView(ListView):
-    model = Friendship
+class FriendPageView(LoginRequiredMixin, ListView):
     template_name = 'friends/user_prof.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.kwargs.get('pk')
+        print("Отриманий user_id:", user_id)
+        context["user"] = User.objects.get(id = user_id)
+        return context
+    
+    def get_queryset(self):
+        user_id = self.kwargs.get('pk')
+        return Post.objects.filter(author_id = user_id)
 
-class RequestsView(ListView):
+
+class RequestsView(LoginRequiredMixin, ListView):
     template_name = "friends/friends.html"
     context_object_name = "all_users"
 
@@ -85,7 +97,7 @@ class RequestsView(ListView):
 
         return JsonResponse({"users": self.queryset})
     
-class RecommendationsView(ListView):
+class RecommendationsView(LoginRequiredMixin, ListView):
     template_name = "friends/friends.html"
     context_object_name = "all_users"
 
@@ -119,7 +131,7 @@ class RecommendationsView(ListView):
 
         return JsonResponse({"users": self.queryset})
 
-class AllFriendsView(ListView):
+class AllFriendsView(LoginRequiredMixin, ListView):
     template_name = "friends/friends.html"
     context_object_name = "all_users"
 
