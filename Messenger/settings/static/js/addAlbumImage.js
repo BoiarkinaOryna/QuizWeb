@@ -36,7 +36,7 @@ function showImage(image, id) {
         if (container.id == id){
             container.insertAdjacentHTML(
                 "afterbegin",
-                `<div style="background: url('http://127.0.0.1:8000/media/images/post/${image.name}');" class="image button-bottom">
+                `<div style="background-image: url('http://127.0.0.1:8000/media/images/post/${image.name}');" class="image button-bottom">
                     <button class="header-button round" type="button">
                         <img class="header-image" src="{% static 'images/eye.png' %}" alt="">
                     </button>

@@ -17,7 +17,7 @@ class FriendsView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['active'] = 'main'
 
-        current_user = Profile.objects.get(user_id = self.request.user).id
+        current_user = Profile.objects.get(user_id = User.objects.get(id = self.request.user.id)).id
         friendships = Friendship.objects.filter(Q(profile2_id=current_user), accepted=False)
 
         users = []
@@ -102,7 +102,7 @@ class RecommendationsView(LoginRequiredMixin, ListView):
     context_object_name = "all_users"
 
     def get_queryset(self):
-        current_user = Profile.objects.get(user_id = self.request.user).id
+        current_user = Profile.objects.get(user_id = User.objects.get(id = self.request.user.id)).id
         print("user =", current_user)
         friendships = Friendship.objects.filter(Q(profile1_id=current_user) | Q(profile2_id=current_user))
         print("friendships =", friendships)
@@ -142,13 +142,14 @@ class AllFriendsView(LoginRequiredMixin, ListView):
         print("friendships =", friendships)
 
         users = []
+        current_user = Profile.objects.get(user_id = User.objects.get(id = self.request.user.id)).id
         for friendship in friendships:
-            if friendship.profile1_id == user:
-                users.append(User.objects.get(id = Profile.objects.get(id = friendship.profile2_id).user_id).id)
+            if friendship.profile1_id == current_user:
+                users.append(User.objects.get(id = Profile.objects.get(id = friendship.profile2_id).user_id))
             else:
-                users.append(User.objects.get(id = Profile.objects.get(id = friendship.profile1_id).user_id).id)
+                users.append(User.objects.get(id = Profile.objects.get(id = friendship.profile1_id).user_id))
             print("users =", users)
-        return User.objects.filter(id__in = users)
+        return users
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

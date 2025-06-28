@@ -44,7 +44,8 @@ main {
     width: 5vw;
     height: 5vw;
     border-radius: 1234px;
-    background-color: #543C52;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .I-am-online{

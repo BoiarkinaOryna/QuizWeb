@@ -113,6 +113,8 @@
     height: 10vh;
 }
 .chat-content{
+    position: absolute;
+    bottom: 0;
     width: 40vw;
     height: fit-content;
     max-height: 70vh;

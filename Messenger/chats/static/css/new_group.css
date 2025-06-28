@@ -1,0 +1,118 @@
+.new-group-form{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    background-color: white;
+    width: 25vw;
+    z-index: 5;
+    height: fit-content;
+    max-height: 70vh;
+    border: 1px solid #CDCED2;
+    border-radius: 20px;
+    padding: 2vh 1vw;
+}
+.n-g{
+    text-align: center;
+    /* position: relative;
+    top: 6vh; */
+    font-size: 34px;
+}
+.cancel{
+    /* position: relative; */
+    border-radius: 1234px;
+    color: #543C52;
+    border: 1px solid #543C52;
+    width: fit-content;
+    height: 4vh;
+    padding: 0 0.5vw;
+    background-color: #ffffff;
+    /* top:42vh;
+    left:10vw; */
+    /* font-size: 18px; */
+}
+.continue{
+    background-color: #543C52;
+    color: white;
+    border: 1px solid #543C52;
+    /* position: relative; */
+    border-radius: 1234px;
+    width: fit-content;
+    height: 4vh;
+    padding: 0 0.5vw;
+    /* top:38vh;
+    left:16vw; */
+    /* font-size: 18px; */
+}
+.chosen{
+    /* position: relative;
+    top:10vh;
+    left: 1vw; */
+    color: #81818D;
+    font-size: small;
+}
+.search2{
+    width: 20vw;
+    height: 4vh;
+    padding: 1vw;
+    border-radius: 10px;
+    /* position: relative; */
+    border:1px solid #CDCED2;
+    /* left: 2vw;
+    top: 8vh; */
+}
+.users{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1vh;
+    width: 20vw;
+}
+/* .tag-div{
+    position: relative;
+    top: 10vh;
+    left: 5vw;
+} */
+.image-n-g{
+    width: 3vw;
+    height:3vw;
+    border-radius: 50px;
+    background-color: #CDCED2;
+    /* position: relative;
+    top:16vh;
+    left:1vw; */
+}
+
+/* .dark-background{
+    background-color: #070a1c9a;
+} */
+
+.active-dark-background{
+    background-color: #070a1c9a;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.active-dark-background::-webkit-scrollbar {
+    display: none;
+}
+
+.submit-buttons{
+    display: flex;
+    gap: 1vw;
+    justify-content: end;
+    width: 20vw;
+}
+
+.tag-div div label{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    gap: 0.5vw;
+    width: 20vw;
+}

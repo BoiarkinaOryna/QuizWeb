@@ -14,6 +14,10 @@
         <h1 class = 'creation'>Редагування публікації {{ post.id }}</h1>
 {% endif %}
     {{ form.as_p }}
+    <p>
+        <label for="link">Посилання</label>
+        <input type="url" name="link" placeholder="Можете залишити посилання">
+    </p>
     </div>
     <div class="post-images" id="{{ post.id }}">
         <div class="temp-image-container"></div>

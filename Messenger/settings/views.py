@@ -43,7 +43,7 @@ class AlbumsView(LoginRequiredMixin, FormMixin, ListView):
 
     def form_valid(self, form):
         album = form.save(commit=False)
-        # album.author = Album.objects.get(id=self.request.user.id)
+        album.author = Profile.objects.get(user_id = User.objects.get(id = self.request.user.id).id)
         album.save()
         # form.save_m2m()
         return redirect(f"/settings/{self.request.user.id}/albums")

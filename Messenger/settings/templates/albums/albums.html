@@ -53,7 +53,7 @@
                     </div>
                 {% endfor %}
                 {% if not avatars %}
-                    <img id="defaultAvatar" class="image" src="{% static 'images/default-avatar.png' %}" alt="">
+                    <img id="defaultAvatar" class="image" style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small_2x/default-avatar-icon-of-social-media-user-vector.jpg')" alt="">
                 {% endif %}
             </div>
 
@@ -107,7 +107,6 @@
 
 {% block scripts %}
     <script src="{% static 'js/showAlbumForm.js' %}"></script>
-    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'js/addAlbumImage.js' %}"></script>
     <script src="{% static 'js/saveAvatar.js' %}"></script>
 {% endblock %}

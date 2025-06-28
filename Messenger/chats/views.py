@@ -1,47 +1,19 @@
 from django.shortcuts import render, redirect
-from django.views.generic import FormView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseForbidden, HttpResponse
+from django.views.generic import FormView, CreateView
+from django.http import HttpResponseForbidden, HttpRequest, HttpResponse
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import F
 from django.template.loader import render_to_string
 
-from .forms import MessageForm
+from .forms import MessageForm, NewGroupForm
 from .models import ChatGroup, ChatMessage
-from friends.models import Friendship
 from home.models import Profile
 
 
 class ChatsView(LoginRequiredMixin, FormView):
     template_name = 'chats/chat.html'
-    form_class = MessageForm
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        current_profile = Profile.objects.get(user=self.request.user)
-        users_groups = ChatGroup.objects.filter(members=current_profile, is_personal_chat=0)
-        context["users_groups"] = users_groups
-
-        group_pk = self.request.POST.get("group_id") or self.request.GET.get("group_id")
-        print("POST data:", self.request.POST, self.request.GET)
-        print("group_pk", group_pk)
-        if group_pk:
-            chat_group = ChatGroup.objects.get(pk=group_pk)
-            context['chat_group'] = chat_group
-            context['message_history'] = ChatMessage.objects.filter(chat_group=chat_group)
-
-        current_user = Profile.objects.get(user_id = self.request.user).id
-        friendships = Friendship.objects.filter(Q(profile1_id=current_user) | Q(profile2_id=current_user), accepted=True)
-        users = []
-        for friendship in friendships:
-            if friendship.profile1_id == current_user:
-                users.append(User.objects.get(id = Profile.objects.get(id = friendship.profile2_id).user_id))
-            else:
-                users.append(User.objects.get(id = Profile.objects.get(id = friendship.profile1_id).user_id))
-            print("users =", users)
-        context["all_friends"] = users
-        return context
+    form_class = NewGroupForm
 
     def form_valid(self, form):
         group_pk = self.request.POST.get("group_id")
@@ -74,14 +46,34 @@ class ChatsView(LoginRequiredMixin, FormView):
             chat_group = ChatGroup.objects.get(pk=group_pk)
         except ChatGroup.DoesNotExist:
             return HttpResponseForbidden("Chat group not found")
-        # if self.request.headers.get("x-requested-with") == "XMLHttpRequest":
         html = render_to_string(
             "chats/chat_block.html",
-            context = {
-                "form": form,
+            {
                 "chat_group": chat_group,
                 "message_history": ChatMessage.objects.filter(chat_group=chat_group),
             },
-            request=self.request,
+            request=self.request
         )
         return HttpResponse(html)
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['current_user'] = self.request.user
+        return kwargs
+    
+class CreateGroupView(FormView):
+    form_class = NewGroupForm
+    template_name = 'chats/chat.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['current_user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        group = form.save(commit=False)
+        group.admin = Profile.objects.get(user_id = User.objects.get(id = self.request.user.id).id)
+
+        group.save()
+        form.save_m2m()
+
+        return super().form_valid(form)

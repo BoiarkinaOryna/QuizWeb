@@ -7,9 +7,33 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'css/chats.css' %}">
+    <link rel="stylesheet" href="{% static 'css/new_group.css' %}">
 {% endblock %}
 
 {% block content %}
+
+    <div class="active-dark-background">
+        <form class="new-group-form" action="" method = 'post' enctype="multipart/form-data">
+            
+            <h1 class = 'n-g'>Нова група</h1>
+            <input type = "text" placeholder = "Пошук" class = 'search2'>
+            <!-- <img src="{% static 'images/search.png' %}" alt="" class="search"> -->
+            <div class="users">
+                <p class = 'chosen'>Вибрано: 3</p>
+                <!-- <div class = 'image-n-g'></div> -->
+                <div class="users-list">
+                    {{ form.as_p }}
+                </div>
+            </div>
+            
+            <div class="submit-buttons">
+                <button type="button" class = 'cancel'>Скасувати</button>
+                <button type="button" class = 'continue'>Далі</button>
+            </div>
+
+        </form>
+    </div>
+
     <button class = 'create-ch'>
         <img src="{% static 'images/plus-w.png' %}" alt="" class="header-image">
         Створити груповий чат
@@ -77,6 +101,6 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'js/findChat.js' %}"></script>
+    <script src="{% static 'js/createGroup.js' %}"></script>
 {% endblock %}

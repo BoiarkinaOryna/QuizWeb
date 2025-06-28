@@ -28,13 +28,7 @@
             </div>
             <div class="my-status">
                 <span>
-                    <p class="status-number">
-                        {% if my_posts_length %}
-                            {{ my_posts_length }}
-                        {% else %}
-                            0
-                        {% endif %}
-                    </p>
+                    <p class="status-number">{{ my_posts_length }}</p>
                     <p class="status-title">Дописи</p>
                 </span>
                 <div class="vtc-line"></div>
@@ -179,6 +173,10 @@
                                     {{ tag.name }}
                                 {% endfor %}
                             </p>
+                            <p>
+                                {% for link in post.link_set.all %}
+                                    <a href="{{ link.url }}">{{ link.url }}</a>
+                                {% endfor %}
                             <div class="post_images_container">
                                 {% for image in post.images.all %}
                                     <img class="post_image" src="{{ image.file.url }}" alt="{{ image.filename }}">
@@ -209,7 +207,6 @@
         const staticBase = "{% static 'images/temp_post_images/' %}";
     </script>
     <script src="{% static 'js/showForm.js' %}"></script>
-    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'js/addImage.js' %}"></script>
     <script src="{% static 'js/tags.js' %}"></script>
 {% endblock %}

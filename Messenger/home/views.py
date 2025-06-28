@@ -6,12 +6,11 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import FormMixin
 from django.views.generic import DeleteView, UpdateView
 from .forms import UserPostForm, ChangeUserPostForm, FirstEditInfoForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Post, Image
+from .models import Post, Image, Link, Avatar
 from friends.models import Friendship
 from registration.models import User, Profile
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden, HttpRequest, JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden, HttpRequest, JsonResponse, HttpResponse
 from django.core.files.base import ContentFile
 from PIL import Image as PILimage
 from io import BytesIO
@@ -92,6 +91,12 @@ class HomePageView(LoginRequiredMixin, FormMixin, ListView):
         form.save_m2m()
         post.images.set(images) 
 
+        link = self.request.POST.get('link')
+        Link.objects.create(
+            url = link,
+            post = post
+        )
+
         return redirect("/")
 
 class MyPostsView(LoginRequiredMixin, FormMixin, ListView):
@@ -165,6 +170,12 @@ class MyPostsView(LoginRequiredMixin, FormMixin, ListView):
         except:
             pass
 
+        link = self.request.POST.get('link')
+        Link.objects.create(
+            ulr = link,
+            post = post.id
+        )
+
         post.save()
         form.save_m2m()
         post.images.set(images) 
@@ -207,3 +218,10 @@ def render_load_image(request: HttpRequest):
     width, height = imageEl.size
     
     return JsonResponse({"width": width, "height": height, "email": request.user.email})
+
+def render_get_avatar(request):
+    response = HttpResponse("Cookie has been set!")
+    profile = Profile.objects.get(user_id = User.objects.get(id = request.user.id).id)
+    avatar_path = Avatar.objects.get(profile_id = profile.id).image
+    response.set_cookie('my_avatar', avatar_path)
+    return response
